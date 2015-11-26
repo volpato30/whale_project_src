@@ -207,7 +207,7 @@ def main(num_epochs=100):
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
             patience = max(patience, epoch * patience_increase)
-            np.savez('best_model.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('/home/rqiao/model/best_model.npz', *lasagne.layers.get_all_param_values(network))
             test_err = 0
             test_acc = 0
             test_batches = 0
