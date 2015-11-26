@@ -1,5 +1,4 @@
-
-from __future__ import print_function
+#!/opt/sharcnet/python/2.7.5/gcc/bin/python
 
 import sys
 import os
