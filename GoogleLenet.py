@@ -11,7 +11,7 @@ import lasagne
 
 def load_data():
     
-    a=np.load("resize_data.npz")
+    a=np.load("/scratch/rqiao/resize_data2.npz")
     train_data=a['arr_0']
     train_target=a['arr_1']
     valid_data=a['arr_2']
@@ -58,10 +58,8 @@ def inception_module(l_in, num_1x1, reduce_3x3, num_3x3, reduce_5x5, num_5x5, ga
 
 def build_cnn(input_var=None):
     
-    network = lasagne.layers.InputLayer(shape=(8, 3, 500, 500),
+    network = lasagne.layers.InputLayer(shape=(20, 3, 256, 256),
                                         input_var=input_var)
-   
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
     
     network = inception_module(
             network, num_1x1=32, reduce_3x3=48, num_3x3=64, reduce_5x5=16, num_5x5=16,)
@@ -185,7 +183,7 @@ def main(num_epochs=100):
             learnrate*=0.96
         updates = lasagne.updates.nesterov_momentum(
             loss, params, learning_rate=learnrate, momentum=0.9)
-        for batch in iterate_minibatches(X_train, y_train, 8, shuffle=False):
+        for batch in iterate_minibatches(X_train, y_train, 20, shuffle=False):
             inputs, targets = batch
             train_err += train_fn(inputs, targets)
             train_batches += 1
@@ -194,7 +192,7 @@ def main(num_epochs=100):
         val_err = 0
         val_acc = 0
         val_batches = 0
-        for batch in iterate_minibatches(X_val, y_val, 8, shuffle=False):
+        for batch in iterate_minibatches(X_val, y_val, 20, shuffle=False):
             inputs, targets = batch
             err, acc = val_fn(inputs, targets)
             val_err += err
@@ -214,7 +212,7 @@ def main(num_epochs=100):
             test_err = 0
             test_acc = 0
             test_batches = 0
-            for batch in iterate_minibatches(X_test, y_test, 8, shuffle=False):
+            for batch in iterate_minibatches(X_test, y_test, 20, shuffle=False):
                 inputs, targets = batch
                 err, acc = val_fn(inputs, targets)
                 test_err += err
