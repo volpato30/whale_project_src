@@ -57,7 +57,7 @@ def inception_module(l_in, num_1x1, reduce_3x3, num_3x3, reduce_5x5, num_5x5, ga
 
 def build_cnn(input_var=None):
     
-    network = lasagne.layers.InputLayer(shape=(20, 3, 256, 256),
+    network = lasagne.layers.InputLayer(shape=(10, 3, 256, 256),
                                         input_var=input_var)
     
     network = inception_module(
@@ -99,7 +99,7 @@ def build_cnn(input_var=None):
 
     network = lasagne.layers.DenseLayer(
             lasagne.layers.dropout(network, p=.5),
-            num_units=10,
+            num_units=20,
             nonlinearity=lasagne.nonlinearities.softmax)
 
     return network
@@ -129,7 +129,7 @@ def main(num_epochs=100):
     # Prepare Theano variables for inputs and targets
     input_var = T.tensor4('inputs')
     target_var = T.ivector('targets')
-    learnrate=0.008
+    learnrate=0.005
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
 
@@ -182,7 +182,7 @@ def main(num_epochs=100):
             learnrate*=0.96
         updates = lasagne.updates.nesterov_momentum(
             loss, params, learning_rate=learnrate, momentum=0.9)
-        for batch in iterate_minibatches(X_train, y_train, 20, shuffle=False):
+        for batch in iterate_minibatches(X_train, y_train, 10, shuffle=False):
             inputs, targets = batch
             train_err += train_fn(inputs, targets)
             train_batches += 1
@@ -191,7 +191,7 @@ def main(num_epochs=100):
         val_err = 0
         val_acc = 0
         val_batches = 0
-        for batch in iterate_minibatches(X_val, y_val, 20, shuffle=False):
+        for batch in iterate_minibatches(X_val, y_val, 10, shuffle=False):
             inputs, targets = batch
             err, acc = val_fn(inputs, targets)
             val_err += err
@@ -211,7 +211,7 @@ def main(num_epochs=100):
             test_err = 0
             test_acc = 0
             test_batches = 0
-            for batch in iterate_minibatches(X_test, y_test, 20, shuffle=False):
+            for batch in iterate_minibatches(X_test, y_test, 10, shuffle=False):
                 inputs, targets = batch
                 err, acc = val_fn(inputs, targets)
                 test_err += err
