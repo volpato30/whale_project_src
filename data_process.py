@@ -30,7 +30,7 @@ os.chdir('./Resize')
 for i in range(WNUM):
     for file in Imgname[i]:
         temp=Image.open(file)
-        aray=np.array(temp,dtype=np.np.float32)
+        aray=np.array(temp,dtype=np.float32)
         aray=np.rollaxis(aray,2)
         aray=aray.reshape(1,3,256,256)
         data=np.concatenate((data,aray),0)
