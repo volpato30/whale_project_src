@@ -1,5 +1,4 @@
-
-from __future__ import print_function
+#!/opt/sharcnet/python/2.7.5/gcc/bin/python
 
 import sys
 import os
@@ -236,4 +235,4 @@ def main(num_epochs=100):
 
 
 if __name__ == '__main__':
-        main(100)
+        main(200)
