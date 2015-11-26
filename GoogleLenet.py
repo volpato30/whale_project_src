@@ -235,4 +235,4 @@ def main(num_epochs=100):
 
 
 if __name__ == '__main__':
-        main(100)
+        main(200)
