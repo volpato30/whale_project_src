@@ -15,7 +15,7 @@ train_label=pd.read_csv('train.csv')
 ids=train_label['whaleID']
 Iname=train_label['Image']
 idcount=Counter(ids).most_common()
-WNUM=200
+WNUM=447
 Wname=list()
 for tup in idcount[:WNUM]:
     Wname.append(tup[0])
@@ -45,6 +45,6 @@ np.random.shuffle(arr)
 train_i=arr[:int(np.floor(length*0.8))]
 valid_i=arr[int(np.floor(length*0.8)):int(np.floor(length*0.9))]
 test_i=arr[int(np.floor(length*0.9)):]
-np.savez("/scratch/rqiao/resize_dataF.npz",data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i],data[test_i,:,:,:],target[test_i])
+np.savez("/scratch/rqiao/resize_dataF447.npz",data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i],data[test_i,:,:,:],target[test_i])
 
 print("successful done")

@@ -1,0 +1,605 @@
+Using gpu device 0: Tesla K20m (CNMeM is disabled)
+Loading data...
+Building model and compiling functions...
+Starting training...
+Epoch 1 of 200 took 387.362s
+  training loss:		5.295543
+  validation loss:		5.296841
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.296881
+  test accuracy:		0.63 %
+Epoch 2 of 200 took 386.665s
+  training loss:		5.284900
+  validation loss:		5.302916
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.293753
+  test accuracy:		0.63 %
+Epoch 3 of 200 took 387.257s
+  training loss:		5.276643
+  validation loss:		5.305398
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.292808
+  test accuracy:		0.63 %
+Epoch 4 of 200 took 388.885s
+  training loss:		5.269426
+  validation loss:		5.305325
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.296005
+  test accuracy:		0.63 %
+Epoch 5 of 200 took 387.430s
+  training loss:		5.264758
+  validation loss:		5.308045
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.295381
+  test accuracy:		0.63 %
+Epoch 6 of 200 took 388.755s
+  training loss:		5.263597
+  validation loss:		5.309137
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.299271
+  test accuracy:		0.63 %
+Epoch 7 of 200 took 387.916s
+  training loss:		5.257945
+  validation loss:		5.312576
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.299285
+  test accuracy:		0.63 %
+Epoch 8 of 200 took 387.779s
+  training loss:		5.258550
+  validation loss:		5.323675
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.304267
+  test accuracy:		0.63 %
+Epoch 9 of 200 took 388.367s
+  training loss:		5.257556
+  validation loss:		5.319325
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.302182
+  test accuracy:		0.63 %
+Epoch 10 of 200 took 388.241s
+  training loss:		5.255741
+  validation loss:		5.317595
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.301847
+  test accuracy:		0.63 %
+Epoch 11 of 200 took 387.345s
+  training loss:		5.254787
+  validation loss:		5.320834
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.304680
+  test accuracy:		0.63 %
+Epoch 12 of 200 took 386.599s
+  training loss:		5.250763
+  validation loss:		5.323296
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.308040
+  test accuracy:		0.63 %
+Epoch 13 of 200 took 388.362s
+  training loss:		5.250096
+  validation loss:		5.321718
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.306114
+  test accuracy:		0.63 %
+Epoch 14 of 200 took 387.223s
+  training loss:		5.250157
+  validation loss:		5.324315
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.307158
+  test accuracy:		0.63 %
+Epoch 15 of 200 took 386.372s
+  training loss:		5.248252
+  validation loss:		5.329400
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.312228
+  test accuracy:		0.63 %
+Epoch 16 of 200 took 387.063s
+  training loss:		5.249278
+  validation loss:		5.326461
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.311784
+  test accuracy:		0.63 %
+Epoch 17 of 200 took 386.476s
+  training loss:		5.245237
+  validation loss:		5.331484
+  validation accuracy:		0.00 %
+best model on test set:
+  test loss:			5.314242
+  test accuracy:		0.63 %
+Epoch 18 of 200 took 387.247s
+  training loss:		5.241911
+  validation loss:		5.332393
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.303717
+  test accuracy:		0.63 %
+Epoch 19 of 200 took 387.533s
+  training loss:		5.233460
+  validation loss:		5.337188
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.294722
+  test accuracy:		0.63 %
+Epoch 20 of 200 took 386.932s
+  training loss:		5.220850
+  validation loss:		5.347544
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.295595
+  test accuracy:		0.63 %
+Epoch 21 of 200 took 387.190s
+  training loss:		5.204748
+  validation loss:		5.350423
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.292912
+  test accuracy:		0.94 %
+Epoch 22 of 200 took 386.777s
+  training loss:		5.194630
+  validation loss:		5.374978
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.310358
+  test accuracy:		0.94 %
+Epoch 23 of 200 took 386.583s
+  training loss:		5.173011
+  validation loss:		5.348768
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.301586
+  test accuracy:		0.94 %
+Epoch 24 of 200 took 386.608s
+  training loss:		5.157761
+  validation loss:		5.408468
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.338904
+  test accuracy:		0.94 %
+Epoch 25 of 200 took 387.023s
+  training loss:		5.133415
+  validation loss:		5.406478
+  validation accuracy:		0.63 %
+best model on test set:
+  test loss:			5.329493
+  test accuracy:		0.94 %
+Epoch 26 of 200 took 386.260s
+  training loss:		5.116235
+  validation loss:		5.396012
+  validation accuracy:		0.31 %
+best model on test set:
+  test loss:			5.319045
+  test accuracy:		0.94 %
+Epoch 27 of 200 took 388.073s
+  training loss:		5.087410
+  validation loss:		5.408530
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			5.320943
+  test accuracy:		0.94 %
+Epoch 28 of 200 took 386.503s
+  training loss:		5.018221
+  validation loss:		5.431145
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			5.355979
+  test accuracy:		0.63 %
+Epoch 29 of 200 took 388.063s
+  training loss:		4.988388
+  validation loss:		5.468194
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			5.370931
+  test accuracy:		0.63 %
+Epoch 30 of 200 took 386.280s
+  training loss:		4.916918
+  validation loss:		5.501521
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			5.412668
+  test accuracy:		2.81 %
+Epoch 31 of 200 took 386.618s
+  training loss:		4.837002
+  validation loss:		5.526228
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			5.434264
+  test accuracy:		3.44 %
+Epoch 32 of 200 took 386.397s
+  training loss:		4.735933
+  validation loss:		5.627281
+  validation accuracy:		0.94 %
+best model on test set:
+  test loss:			5.463396
+  test accuracy:		1.25 %
+Epoch 33 of 200 took 386.865s
+  training loss:		4.610314
+  validation loss:		5.671981
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			5.508497
+  test accuracy:		1.88 %
+Epoch 34 of 200 took 387.804s
+  training loss:		4.468920
+  validation loss:		5.734469
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			5.605336
+  test accuracy:		2.19 %
+Epoch 35 of 200 took 386.287s
+  training loss:		4.313888
+  validation loss:		5.698585
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			5.579660
+  test accuracy:		3.44 %
+Epoch 36 of 200 took 386.662s
+  training loss:		4.156903
+  validation loss:		5.821060
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			5.698792
+  test accuracy:		1.88 %
+Epoch 37 of 200 took 386.180s
+  training loss:		3.963569
+  validation loss:		5.903035
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			5.696242
+  test accuracy:		2.19 %
+Epoch 38 of 200 took 387.556s
+  training loss:		3.704934
+  validation loss:		6.184516
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			5.983784
+  test accuracy:		2.50 %
+Epoch 39 of 200 took 387.016s
+  training loss:		3.492277
+  validation loss:		5.788408
+  validation accuracy:		2.81 %
+best model on test set:
+  test loss:			5.610942
+  test accuracy:		2.81 %
+Epoch 40 of 200 took 386.706s
+  training loss:		3.313955
+  validation loss:		6.061574
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			5.857381
+  test accuracy:		2.50 %
+Epoch 41 of 200 took 386.851s
+  training loss:		3.055344
+  validation loss:		6.366230
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			6.159689
+  test accuracy:		2.19 %
+Epoch 42 of 200 took 387.526s
+  training loss:		2.925792
+  validation loss:		6.582522
+  validation accuracy:		0.94 %
+best model on test set:
+  test loss:			6.267799
+  test accuracy:		3.44 %
+Epoch 43 of 200 took 388.175s
+  training loss:		2.590985
+  validation loss:		6.768034
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			6.600416
+  test accuracy:		2.50 %
+Epoch 44 of 200 took 386.932s
+  training loss:		2.420328
+  validation loss:		6.733638
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			6.512065
+  test accuracy:		2.19 %
+Epoch 45 of 200 took 387.229s
+  training loss:		2.240396
+  validation loss:		7.129249
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			6.796230
+  test accuracy:		1.88 %
+Epoch 46 of 200 took 386.968s
+  training loss:		2.121244
+  validation loss:		6.857036
+  validation accuracy:		0.63 %
+best model on test set:
+  test loss:			6.652636
+  test accuracy:		2.50 %
+Epoch 47 of 200 took 386.501s
+  training loss:		1.910745
+  validation loss:		7.943860
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			7.599359
+  test accuracy:		1.88 %
+Epoch 48 of 200 took 388.202s
+  training loss:		1.841189
+  validation loss:		6.760637
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			6.513638
+  test accuracy:		1.56 %
+Epoch 49 of 200 took 386.373s
+  training loss:		1.736082
+  validation loss:		6.756689
+  validation accuracy:		0.94 %
+best model on test set:
+  test loss:			6.456096
+  test accuracy:		1.56 %
+Epoch 50 of 200 took 387.374s
+  training loss:		1.554205
+  validation loss:		7.723965
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			7.218642
+  test accuracy:		3.44 %
+Epoch 51 of 200 took 387.229s
+  training loss:		1.549902
+  validation loss:		8.057914
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			7.746493
+  test accuracy:		2.81 %
+Epoch 52 of 200 took 386.554s
+  training loss:		1.464599
+  validation loss:		6.629772
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			6.414847
+  test accuracy:		3.13 %
+Epoch 53 of 200 took 387.244s
+  training loss:		1.454614
+  validation loss:		7.020190
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			6.499706
+  test accuracy:		2.81 %
+Epoch 54 of 200 took 386.695s
+  training loss:		1.308421
+  validation loss:		7.494622
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			6.939926
+  test accuracy:		2.81 %
+Epoch 55 of 200 took 388.716s
+  training loss:		1.201379
+  validation loss:		7.993745
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			7.330736
+  test accuracy:		4.38 %
+Epoch 56 of 200 took 386.344s
+  training loss:		1.140530
+  validation loss:		8.363741
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			7.607340
+  test accuracy:		3.44 %
+Epoch 57 of 200 took 387.324s
+  training loss:		1.093921
+  validation loss:		7.540141
+  validation accuracy:		2.81 %
+best model on test set:
+  test loss:			7.086018
+  test accuracy:		2.19 %
+Epoch 58 of 200 took 386.319s
+  training loss:		1.070285
+  validation loss:		7.399257
+  validation accuracy:		2.81 %
+best model on test set:
+  test loss:			6.917662
+  test accuracy:		4.38 %
+Epoch 59 of 200 took 386.596s
+  training loss:		0.968473
+  validation loss:		8.719354
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			8.010947
+  test accuracy:		1.56 %
+Epoch 60 of 200 took 387.572s
+  training loss:		0.989887
+  validation loss:		8.219719
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			7.463098
+  test accuracy:		3.44 %
+Epoch 61 of 200 took 386.753s
+  training loss:		0.894745
+  validation loss:		8.848876
+  validation accuracy:		2.81 %
+best model on test set:
+  test loss:			8.340261
+  test accuracy:		4.38 %
+Epoch 62 of 200 took 387.254s
+  training loss:		0.929808
+  validation loss:		7.693254
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			7.221957
+  test accuracy:		4.06 %
+Epoch 63 of 200 took 386.386s
+  training loss:		0.910988
+  validation loss:		7.622359
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			7.341350
+  test accuracy:		4.69 %
+Epoch 64 of 200 took 386.460s
+  training loss:		0.775273
+  validation loss:		8.228376
+  validation accuracy:		3.13 %
+best model on test set:
+  test loss:			7.669430
+  test accuracy:		2.50 %
+Epoch 65 of 200 took 386.311s
+  training loss:		0.684715
+  validation loss:		10.656507
+  validation accuracy:		2.19 %
+Epoch 66 of 200 took 387.122s
+  training loss:		0.683362
+  validation loss:		7.916454
+  validation accuracy:		3.13 %
+best model on test set:
+  test loss:			7.468951
+  test accuracy:		4.38 %
+Epoch 67 of 200 took 387.662s
+  training loss:		0.683859
+  validation loss:		7.944475
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			7.425970
+  test accuracy:		4.06 %
+Epoch 68 of 200 took 387.125s
+  training loss:		0.677468
+  validation loss:		7.044100
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			6.660059
+  test accuracy:		3.44 %
+Epoch 69 of 200 took 388.338s
+  training loss:		0.594219
+  validation loss:		9.967188
+  validation accuracy:		1.88 %
+Epoch 70 of 200 took 386.223s
+  training loss:		0.601251
+  validation loss:		8.769890
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			8.226485
+  test accuracy:		5.00 %
+Epoch 71 of 200 took 387.492s
+  training loss:		0.562371
+  validation loss:		9.078398
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			8.264462
+  test accuracy:		3.13 %
+Epoch 72 of 200 took 386.563s
+  training loss:		0.559771
+  validation loss:		7.737761
+  validation accuracy:		3.44 %
+best model on test set:
+  test loss:			7.251216
+  test accuracy:		3.44 %
+Epoch 73 of 200 took 386.329s
+  training loss:		0.575070
+  validation loss:		8.028160
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			7.513444
+  test accuracy:		2.81 %
+Epoch 74 of 200 took 388.358s
+  training loss:		0.521134
+  validation loss:		9.251137
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			8.601592
+  test accuracy:		4.38 %
+Epoch 75 of 200 took 386.301s
+  training loss:		0.551268
+  validation loss:		8.133989
+  validation accuracy:		2.81 %
+best model on test set:
+  test loss:			7.721139
+  test accuracy:		4.69 %
+Epoch 76 of 200 took 387.827s
+  training loss:		0.522194
+  validation loss:		7.281425
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			6.918123
+  test accuracy:		3.13 %
+Epoch 77 of 200 took 386.227s
+  training loss:		0.495482
+  validation loss:		7.699172
+  validation accuracy:		1.25 %
+best model on test set:
+  test loss:			7.217557
+  test accuracy:		3.75 %
+Epoch 78 of 200 took 386.495s
+  training loss:		0.449228
+  validation loss:		8.075099
+  validation accuracy:		1.88 %
+best model on test set:
+  test loss:			7.586068
+  test accuracy:		5.00 %
+Epoch 79 of 200 took 387.582s
+  training loss:		0.517542
+  validation loss:		8.390998
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			8.000049
+  test accuracy:		4.06 %
+Epoch 80 of 200 took 386.773s
+  training loss:		0.475621
+  validation loss:		9.333795
+  validation accuracy:		2.19 %
+best model on test set:
+  test loss:			8.495008
+  test accuracy:		5.31 %
+Epoch 81 of 200 took 388.305s
+  training loss:		0.469578
+  validation loss:		8.877181
+  validation accuracy:		1.56 %
+best model on test set:
+  test loss:			8.521571
+  test accuracy:		4.38 %
+Epoch 82 of 200 took 386.939s
+  training loss:		0.418037
+  validation loss:		8.769761
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			8.378865
+  test accuracy:		4.06 %
+Epoch 83 of 200 took 386.465s
+  training loss:		0.409036
+  validation loss:		9.344098
+  validation accuracy:		3.13 %
+best model on test set:
+  test loss:			8.887354
+  test accuracy:		4.38 %
+Epoch 84 of 200 took 387.325s
+  training loss:		0.466457
+  validation loss:		8.016480
+  validation accuracy:		2.50 %
+best model on test set:
+  test loss:			7.678169
+  test accuracy:		4.06 %
+Epoch 85 of 200 took 387.244s
+  training loss:		0.413420
+  validation loss:		8.793618
+  validation accuracy:		3.13 %
+best model on test set:
+  test loss:			8.211901
+  test accuracy:		3.75 %
+Epoch 86 of 200 took 387.076s
+  training loss:		0.379956
+  validation loss:		8.514034
+  validation accuracy:		3.75 %
+best model on test set:
+  test loss:			7.925607
+  test accuracy:		4.38 %
+Epoch 87 of 200 took 386.960s
+  training loss:		0.406686
+  validation loss:		8.625034
+  validation accuracy:		2.50 %
+beslurmstepd: *** JOB 4281 CANCELLED AT 2015-11-27T02:41:25 DUE TO TIME LIMIT on mos18 ***
