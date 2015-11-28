@@ -7,6 +7,8 @@ import numpy as np
 import theano
 import theano.tensor as T
 import lasagne
+from lasagne.regularization import regularize_layer_params, l2,
+
 
 def load_data():
     
@@ -136,9 +138,10 @@ def main(num_epochs=100):
     network = build_cnn(input_var)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
+    l2_penalty = regularize_layer_params(network, l2)
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()
+    loss = loss.mean()+0.005*l2_penalty
     # We could add some weight decay as well here, see lasagne.regularization.
 
     # Create update expressions for training, i.e., how to modify the
@@ -235,4 +238,4 @@ def main(num_epochs=100):
 
 
 if __name__ == '__main__':
-        main(200)
+        main(100)
