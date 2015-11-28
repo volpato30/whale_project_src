@@ -10,7 +10,7 @@ import lasagne
 
 def load_data():
     
-    a=np.load("/scratch/rqiao/resize_dataF.npz")
+    a=np.load("/scratch/rqiao/resize_dataF447.npz")
     train_data=a['arr_0']
     train_target=a['arr_1']
     valid_data=a['arr_2']
@@ -99,7 +99,7 @@ def build_cnn(input_var=None):
 
     network = lasagne.layers.DenseLayer(
             lasagne.layers.dropout(network, p=.5),
-            num_units=200,
+            num_units=447,
             nonlinearity=lasagne.nonlinearities.softmax)
 
     return network
@@ -207,7 +207,7 @@ def main(num_epochs=100):
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
             patience = max(patience, epoch * patience_increase)
-            np.savez('best_model200.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model447.npz', *lasagne.layers.get_all_param_values(network))
             test_err = 0
             test_acc = 0
             test_batches = 0
