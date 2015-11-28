@@ -7,7 +7,7 @@ import numpy as np
 import theano
 import theano.tensor as T
 import lasagne
-from lasagne.regularization import regularize_layer_params, l2,
+from lasagne.regularization import regularize_layer_params, l2
 
 
 def load_data():

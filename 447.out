@@ -1,0 +1,6 @@
+  File "./GoogleLenet.py", line 10
+    from lasagne.regularization import regularize_layer_params, l2,
+SyntaxError: trailing comma not allowed without surrounding parentheses
+  File "./GoogleLenet.py", line 10
+    from lasagne.regularization import regularize_layer_params, l2,
+SyntaxError: trailing comma not allowed without surrounding parentheses
