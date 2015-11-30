@@ -12,14 +12,12 @@ from lasagne.regularization import regularize_layer_params, l2
 
 def load_data():
     
-    a=np.load("/scratch/rqiao/resize_dataF447.npz")
+    a=np.load("/scratch/rqiao/resize_dataOmit5.npz")
     train_data=a['arr_0']
     train_target=a['arr_1']
     valid_data=a['arr_2']
     valid_target=a['arr_3']
-    test_data=a['arr_4']
-    test_target=a['arr_5']
-    return train_data,train_target,valid_data,valid_target,test_data,test_target
+    return train_data,train_target,valid_data,valid_target
 
 Conv2DLayer = lasagne.layers.Conv2DLayer
 
@@ -101,7 +99,7 @@ def build_cnn(input_var=None):
 
     network = lasagne.layers.DenseLayer(
             lasagne.layers.dropout(network, p=.5),
-            num_units=447,
+            num_units=344,
             nonlinearity=lasagne.nonlinearities.softmax)
 
     return network
@@ -127,7 +125,6 @@ def main(num_epochs=100):
     datasets = load_data()
     X_train, y_train = datasets[0], datasets[1]
     X_val, y_val = datasets[2], datasets[3]
-    X_test, y_test = datasets[4], datasets[5]
     # Prepare Theano variables for inputs and targets
     input_var = T.tensor4('inputs')
     target_var = T.ivector('targets')
@@ -210,21 +207,10 @@ def main(num_epochs=100):
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
             patience = max(patience, epoch * patience_increase)
-            np.savez('best_model447.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5.npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
-            test_err = 0
-            test_acc = 0
-            test_batches = 0
-            for batch in iterate_minibatches(X_test, y_test, 10, shuffle=False):
-                inputs, targets = batch
-                err, acc = val_fn(inputs, targets)
-                test_err += err
-                test_acc += acc
-                test_batches += 1
-            print("best model on test set:")
-            print("  test loss:\t\t\t{:.6f}".format(test_err / test_batches))
-            print("  test accuracy:\t\t{:.2f} %".format(
-                test_acc / test_batches * 100))
+            print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
+
         if patience<epoch:
             print("early stop because no significant improvement")
             break
