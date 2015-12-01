@@ -138,7 +138,7 @@ def main(num_epochs=100):
     l2_penalty = regularize_layer_params(network, l2)
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()+0.005*l2_penalty
+    loss = loss.mean()+0.01*l2_penalty
     # We could add some weight decay as well here, see lasagne.regularization.
 
     # Create update expressions for training, i.e., how to modify the
@@ -166,10 +166,11 @@ def main(num_epochs=100):
     # Compile a second function computing the validation loss and accuracy:
     val_fn = theano.function([input_var, target_var], [test_loss, test_acc])
 
-    patience=50
+    patience=100
     patience_increase=2.5
     best_val_loss=10
     improvement_threshold=0.98
+    best_acc=0
     # Finally, launch the training loop.
     print("Starting training...")
     # We iterate over epochs:
@@ -210,6 +211,11 @@ def main(num_epochs=100):
             np.savez('best_model_omit5.npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
+
+        if val_acc / val_batches>best_acc:
+            best_acc=val_acc / val_batches
+            np.savez('best_classification_model_omit5.npz', *lasagne.layers.get_all_param_values(network))
+            print('                    saved best classification  model')
 
         if patience<epoch:
             print("early stop because no significant improvement")
