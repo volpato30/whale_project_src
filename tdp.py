@@ -26,4 +26,4 @@ print(fname)
 #test_data=test_data[1:,:,:,:]
 
 
-np.savez("/scratch/rqiao/miniproject.npz",train_data,train_target,valid_data,valid_target)
+#np.savez("/scratch/rqiao/mptest_data.npz",test_data)
