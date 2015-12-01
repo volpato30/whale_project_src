@@ -72,7 +72,7 @@ fn = theano.function([input_var], [pred])
 
 test_p=[]
 for i in range(1643):
-    test_p.append(fn(test_data[i,:,:,:]))
+    test_p.append(fn(test_data[i,:,:,:].reshape(1,1,2000,300)))
 
 test_p=np.array(test_p,dtype=np.int16)
 print(test_p[:10])
