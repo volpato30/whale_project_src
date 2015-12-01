@@ -12,6 +12,7 @@ fname=[]
 seq=[8,1,9,10,11,12,13,14,15,16,0,2,3,4,5,6,7]
 for i in seq:
     fname.append(dname[i])
+print(dname)
 print(fname)
 
 #test_data=np.zeros((1,1,2000,300),dtype=np.float32)
