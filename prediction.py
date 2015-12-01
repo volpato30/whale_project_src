@@ -16,7 +16,7 @@ bias=0
 
 def build_cnn(input_var=None,num_2xd=32,num_3xd=32,num_5xd=32):
     
-    l_in = lasagne.layers.InputLayer(shape=(1643, 1, 2000, 300),
+    l_in = lasagne.layers.InputLayer(shape=(1, 1, 2000, 300),
                                         input_var=input_var)
     out_layers = []
 
@@ -70,8 +70,11 @@ pred=T.argmax(test_prediction, axis=1)
 
 fn = theano.function([input_var], [pred])
 
-test_p=fn(test_data)
+test_p=[]
+for i in range(1643):
+    test_p.append(fn(test_data[i,:,:,:]))
 
+test_p=np.array(test_p,dtype=np.int16)
 print(test_p[:10])
 np.savez('prediction.npz',test_p)
 
