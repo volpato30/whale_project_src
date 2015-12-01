@@ -138,6 +138,7 @@ def main(num_epochs=100):
     # We iterate over epochs:
     for epoch in range(num_epochs):
         # In each epoch, we do a full pass over the training data:
+        train_err = 0
         train_batches = 0
         start_time = time.time()
         if epoch % 8 == 7:
