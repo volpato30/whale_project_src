@@ -166,7 +166,7 @@ def main(num_epochs=100):
     # Compile a second function computing the validation loss and accuracy:
     val_fn = theano.function([input_var, target_var], [test_loss, test_acc])
 
-    patience=100
+    patience=150
     patience_increase=2.5
     best_val_loss=10
     improvement_threshold=0.98
@@ -231,4 +231,4 @@ def main(num_epochs=100):
 
 
 if __name__ == '__main__':
-        main(200)
+        main(300)
