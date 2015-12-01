@@ -17,12 +17,18 @@ for i in seq:
 print(fname)
 
 test_data=np.zeros((1,1,2000,300),dtype=np.float32)
-for file in fname:
+for file in fname[:16]:
     temp=sio.loadmat(file)
     for i in range(100):
         a=np.array(temp['tstvec'][i][0],dtype=np.float32)
         a=a.reshape((1,1,2000,300))
         test_data=np.concatenate((test_data,a),axis=0)
+
+temp=sio.loadmat(fname[16])
+for i in range(43):
+	a=np.array(temp['tstvec'][i][0],dtype=np.float32)
+	a=a.reshape((1,1,2000,300))
+	test_data=np.concatenate((test_data,a),axis=0)
 
 test_data=test_data[1:,:,:,:]
 
