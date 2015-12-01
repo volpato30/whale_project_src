@@ -168,7 +168,7 @@ def main(num_epochs=100):
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
             patience = max(patience, epoch * patience_increase)
-            np.savez('miniproject_bestmodel.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('miniproject_bestmodeltanh.npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("best validation loss\t\t{:.6f}".format(best_val_loss))
         if patience<epoch:
@@ -176,4 +176,4 @@ def main(num_epochs=100):
             break
 
 if __name__ == '__main__':
-        main(200)
+        main(80)
