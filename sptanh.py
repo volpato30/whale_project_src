@@ -176,4 +176,4 @@ def main(num_epochs=100):
             break
 
 if __name__ == '__main__':
-        main(200)
+        main(80)
