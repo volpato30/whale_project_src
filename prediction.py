@@ -12,7 +12,7 @@ import lasagne
 
 dimension=300
 
-def convlayer(l_in, num_2xd, num_3xd, num5xd, gain=1.0, bias=0):
+def convlayer(l_in, num_2xd, num_3xd, num_5xd, gain=1.0, bias=0):
     
     out_layers = []
 
@@ -41,7 +41,7 @@ def build_cnn(input_var=None):
     network = lasagne.layers.InputLayer(shape=(10, 1, 2000, 300),
                                         input_var=input_var)
     
-    network = convlayer(network, num_2xd=32, num_3xd=32, num5xd=32)
+    network = convlayer(network, num_2xd=32, num_3xd=32, num_5xd=32)
     
     network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2000, 1))
 
