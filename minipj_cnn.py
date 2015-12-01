@@ -20,7 +20,7 @@ def load_data():
     return train_data,train_target,valid_data,valid_target
 
 Conv2DLayer = lasagne.layers.Conv2DLayer
-dimension=300
+dimension=299
 
 def convlayer(l_in, num_1xd, num_3xd, num_5xd, gain=1.0, bias=0):
     
