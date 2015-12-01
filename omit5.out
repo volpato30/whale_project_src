@@ -1,0 +1,8 @@
+Using gpu device 0: Tesla K20m
+Traceback (most recent call last):
+  File "./Googlenet_no_test.py", line 9, in <module>
+    import lasagne
+ImportError: No module named lasagne
+Using gpu device 0: Tesla K20m (CNMeM is disabled)
+slurmstepd: *** JOB 5507 CANCELLED AT 2015-11-30T15:37:59 *** on mos11
+Using gpu device 0: Tesla K20m (CNMeM is disabled)
