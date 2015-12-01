@@ -9,44 +9,41 @@ import theano.tensor as T
 import lasagne
 
 
-
+Conv2DLayer = lasagne.layers.Conv2DLayer
 dimension=300
+gain=1
+bias=0
 
-def convlayer(l_in, num_2xd, num_3xd, num_5xd, gain=1.0, bias=0):
+def build_cnn(input_var=None,num_2xd=32,num_3xd=32,num_5xd=32):
     
+    l_in = lasagne.layers.InputLayer(shape=(10, 1, 2000, 300),
+                                        input_var=input_var)
     out_layers = []
 
-    if num_2xd > 0:
-        
-        l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), pad=(1,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
-        out_layers.append(l_2xd)
-    
-    if num_3xd > 0:
-        
-        l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), pad=(2,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
-        out_layers.append(l_3xd)
+    l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+       
+    m_2xd = lasagne.layers.MaxPool2DLayer(l_2xd, pool_size=(1999, 1))
 
-    if num_5xd > 0:
-        
-        l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), pad=(4,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
-        out_layers.append(l_5xd)
+    out_layers.append(m_2xd)
     
-    # stack
+    l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        
+    m_3xd = lasagne.layers.MaxPool2DLayer(l_3xd, pool_size=(1998, 1))
+
+    out_layers.append(m_3xd)
+
+    l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+       
+    m_5xd = lasagne.layers.MaxPool2DLayer(l_5xd, pool_size=(1996, 1)) 
+
+    out_layers.append(m_5xd)
+
+
     l_out = lasagne.layers.concat(out_layers)
-    return l_out
 
-
-def build_cnn(input_var=None):
-    
-    network = lasagne.layers.InputLayer(shape=(10, 1, 2000, 300),
-                                        input_var=input_var)
-    
-    network = convlayer(network, num_2xd=32, num_3xd=32, num_5xd=32)
-    
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2000, 1))
 
     network = lasagne.layers.DenseLayer(
-            lasagne.layers.dropout(network, p=.5),
+            lasagne.layers.dropout(l_out, p=.5),
             num_units=128,
             nonlinearity=lasagne.nonlinearities.rectify)
 
@@ -56,6 +53,7 @@ def build_cnn(input_var=None):
             nonlinearity=lasagne.nonlinearities.softmax)
 
     return network
+
 
 
 
