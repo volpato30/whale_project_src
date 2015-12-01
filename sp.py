@@ -32,8 +32,7 @@ def build_cnn(input_var=None):
     out_layers = []
 
     l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
-        out_layers.append(l_2xd)
-
+       
     m_2xd = lasagne.layers.MaxPool2DLayer(l_2xd, pool_size=(1999, 1))
 
     out_layers.append(m_2xd)
