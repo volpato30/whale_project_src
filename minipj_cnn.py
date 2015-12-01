@@ -22,7 +22,7 @@ def load_data():
 Conv2DLayer = lasagne.layers.Conv2DLayer
 dimension=300
 
-def convlayer(l_in, num_2xd, num_3xd, num5xd, gain=1.0, bias=0):
+def convlayer(l_in, num_2xd, num_3xd, num_5xd, gain=1.0, bias=0):
     
     out_layers = []
 
