@@ -28,17 +28,17 @@ def convlayer(l_in, num_2xd, num_3xd, num_5xd, gain=1.0, bias=0):
 
     if num_2xd > 0:
         
-        l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), pad=(1,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), pad=(0,1), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         out_layers.append(l_2xd)
     
     if num_3xd > 0:
         
-        l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), pad=(2,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), pad=(0,2), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         out_layers.append(l_3xd)
 
     if num_5xd > 0:
         
-        l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), pad=(4,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), pad=(0,4), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         out_layers.append(l_5xd)
     
     # stack
