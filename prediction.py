@@ -56,14 +56,13 @@ def build_cnn(input_var=None,num_2xd=32,num_3xd=32,num_5xd=32):
 
 
 
-
 input_var = T.tensor4('inputs')
 network = build_cnn(input_var)
 with np.load('miniproject_bestmodel.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
 lasagne.layers.set_all_param_values(network, param_values)
 
-test_data=np.load("/scratch/rqiao/mptest.npz")['arr_0']
+test_data=np.load("/scratch/rqiao/mptest_data.npz")['arr_0']
 
 test_prediction = lasagne.layers.get_output(network, deterministic=True)
 
