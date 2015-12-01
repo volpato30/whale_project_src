@@ -33,12 +33,12 @@ def convlayer(l_in, num_2xd, num_3xd, num_5xd, gain=1.0, bias=0):
     
     if num_3xd > 0:
         
-        l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), pad=(1,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), pad=(2,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         out_layers.append(l_3xd)
 
     if num_5xd > 0:
         
-        l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), pad=(1,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), pad=(4,0), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         out_layers.append(l_5xd)
     
     # stack
@@ -53,7 +53,7 @@ def build_cnn(input_var=None):
     
     network = convlayer(network, num_2xd=32, num_3xd=32, num_5xd=32)
     
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2000, 1))
+    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 1))
 
     network = lasagne.layers.DenseLayer(
             lasagne.layers.dropout(network, p=.5),
