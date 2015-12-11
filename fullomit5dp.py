@@ -139,4 +139,7 @@ np.savez("/scratch/rqiao/full_data/Rotate270.npz",data,target)
 
 
 print("successful done")
+<<<<<<< HEAD
 
+=======
+>>>>>>> ae5730b3662c4b5d1d9fc547cd720e046c5aee05

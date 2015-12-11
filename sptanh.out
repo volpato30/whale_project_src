@@ -1,7 +1,0 @@
-Using gpu device 0: Tesla K20m
-Traceback (most recent call last):
-  File "./sptanh.py", line 9, in <module>
-    import lasagne
-ImportError: No module named lasagne
-Using gpu device 0: Tesla K20m (CNMeM is disabled)
-slurmstepd: *** JOB 5635 CANCELLED AT 2015-11-30T23:45:46 DUE TO TIME LIMIT on mos18 ***
