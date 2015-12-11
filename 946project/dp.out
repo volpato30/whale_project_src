@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "./traindatadp.py", line 5, in <module>
+    import pandas as pd
+ImportError: No module named pandas
+Traceback (most recent call last):
+  File "./traindatadp.py", line 33, in <module>
+    train_data=np.concatenate((test_data,a),axis=0)
+NameError: name 'test_data' is not defined
+Traceback (most recent call last):
+  File "./traindatadp.py", line 33, in <module>
+    train_data=np.concatenate((test_data,a),axis=0)
+NameError: name 'test_data' is not defined
