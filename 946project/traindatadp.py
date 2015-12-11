@@ -30,7 +30,7 @@ for file in fname:
     for i in range(500):
         a=np.array(temp['trvec'][i][0],dtype=np.float32)
         a=a.reshape((1,1,500,300))
-        train_data=np.concatenate((test_data,a),axis=0)
+        train_data=np.concatenate((train_data,a),axis=0)
 
 train_data=train_data[1:,:,:,:]
 
