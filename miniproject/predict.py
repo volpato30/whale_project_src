@@ -5,7 +5,6 @@ import pandas as pd
 import os
 import sys
 from PIL import Image
-import glob
 import theano
 import theano.tensor as T
 import lasagne
@@ -96,7 +95,7 @@ def build_cnn(input_var=None):
     return network
 
 
-nput_var = T.tensor4('inputs')
+input_var = T.tensor4('inputs')
 network = build_cnn(input_var)
 with np.load('best_classification_model_omit5.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
@@ -119,11 +118,11 @@ os.chdir('/scratch/rqiao/Fin/Resize')
 
 test_p=[]
 for i in name['Image']:
-    a=get_img
+    a=get_img(i)
     test_p.append(pred_fn(a))
 
 print(test_p[:10])
-np.savez('whale_prediction344.npz',test_p)
+np.savez('/home/rqiao/backup/whale_prediction344.npz',test_p)
 
 
 
