@@ -10,7 +10,7 @@ os.chdir('/scratch/amirlk/IMDB/')
 dname=glob.glob('Tes*.mat')
 a=[]
 for i in dname:
-    m = re.search('(?<=Trainvec)[0-9]*', i)
+    m = re.search('(?<=Testvec)[0-9]*', i)
     a.append(m.group(0))
 
 a=np.array(a,dtype=np.int32)
@@ -23,7 +23,7 @@ test_data=np.zeros((1,1,500,300),dtype=np.float32)
 for file in fname:
     temp=sio.loadmat(file)
     for i in range(500):
-        a=np.array(temp['trvec'][i][0],dtype=np.float32)
+        a=np.array(temp['tstvec'][i][0],dtype=np.float32)
         a=a.reshape((1,1,500,300))
         test_data=np.concatenate((test_data,a),axis=0)
 
