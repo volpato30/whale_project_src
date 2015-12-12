@@ -63,7 +63,7 @@ def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
 
 
     network = lasagne.layers.DenseLayer(
-            lasagne.layers.dropout(l_out, p=.5),
+            l_out,
             num_units=256,
             nonlinearity=lasagne.nonlinearities.tanh)
 
