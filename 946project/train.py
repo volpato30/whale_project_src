@@ -99,7 +99,7 @@ def main(num_epochs=100):
     # Prepare Theano variables for inputs and targets
     input_var = T.tensor4('inputs')
     target_var = T.ivector('targets')
-    learnrate=0.01
+    learnrate=0.005
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
 
@@ -139,6 +139,7 @@ def main(num_epochs=100):
     
     best_val_loss=10
     improvement_threshold=0.999
+    best_acc=0
     # Finally, launch the training loop.
     print("Starting training...")
     # We iterate over epochs:
@@ -147,8 +148,6 @@ def main(num_epochs=100):
         train_err = 0
         train_batches = 0
         start_time = time.time()
-        if epoch % 8 == 7:
-            learnrate*=0.96
         updates = lasagne.updates.nesterov_momentum(
             loss, params, learning_rate=learnrate, momentum=0.9)
         for batch in iterate_minibatches(X_train, y_train, 40, shuffle=False):
@@ -174,9 +173,9 @@ def main(num_epochs=100):
         print("  validation loss:\t\t{:.6f}".format(val_err / val_batches))
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
-        if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('IMDB_model.npz', *lasagne.layers.get_all_param_values(network))
-            best_val_loss=val_err/val_batches
+        if val_acc / val_batches > best_acc:
+            np.savez('IMDBbestaccmodel.npz', *lasagne.layers.get_all_param_values(network))
+            best_acc=val_acc / val_batches
             test_err = 0
             test_acc = 0
             test_batches = 0
@@ -193,4 +192,4 @@ def main(num_epochs=100):
         
 
 if __name__ == '__main__':
-        main(200)
+        main(100)
