@@ -63,12 +63,12 @@ def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
 
 
     network = lasagne.layers.DenseLayer(
-            l_out,
+            lasagne.layers.dropout(l_out, p=.5),
             num_units=256,
             nonlinearity=lasagne.nonlinearities.tanh)
 
     network = lasagne.layers.DenseLayer(
-            network,
+            lasagne.layers.dropout(network, p=.5),
             num_units=2,
             nonlinearity=lasagne.nonlinearities.softmax)
 
@@ -103,12 +103,13 @@ def main(num_epochs=100):
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
 
+    l2_penalty = regularize_layer_params(network, l2)
     network = build_cnn(input_var)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()
+    loss = loss.mean()++0.09*l2_penalty
     # We could add some weight decay as well here, see lasagne.regularization.
 
     # Create update expressions for training, i.e., how to modify the
@@ -138,7 +139,6 @@ def main(num_epochs=100):
 
     
     best_val_loss=10
-    improvement_threshold=0.999
     best_acc=0
     # Finally, launch the training loop.
     print("Starting training...")
@@ -150,7 +150,7 @@ def main(num_epochs=100):
         start_time = time.time()
         updates = lasagne.updates.nesterov_momentum(
             loss, params, learning_rate=learnrate, momentum=0.9)
-        for batch in iterate_minibatches(X_train, y_train, 40, shuffle=False):
+        for batch in iterate_minibatches(X_train, y_train, 250, shuffle=False):
             inputs, targets = batch
             train_err += train_fn(inputs, targets)
             train_batches += 1
@@ -159,7 +159,7 @@ def main(num_epochs=100):
         val_err = 0
         val_acc = 0
         val_batches = 0
-        for batch in iterate_minibatches(X_val, y_val, 40, shuffle=False):
+        for batch in iterate_minibatches(X_val, y_val, 250, shuffle=False):
             inputs, targets = batch
             err, acc = val_fn(inputs, targets)
             val_err += err
@@ -179,7 +179,7 @@ def main(num_epochs=100):
             test_err = 0
             test_acc = 0
             test_batches = 0
-            for batch in iterate_minibatches(X_test, y_test, 40, shuffle=False):
+            for batch in iterate_minibatches(X_test, y_test, 250, shuffle=False):
                 inputs, targets = batch
                 err, acc = val_fn(inputs, targets)
                 test_err += err

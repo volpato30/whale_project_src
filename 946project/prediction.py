@@ -80,7 +80,7 @@ for i in range(25000):
     test_p.append(fn(test_data[i,:,:,:].reshape(1,1,500,300)))
 
 test_p=np.array(test_p,dtype=np.int16)
-print(test_p[:10])
+print(test_p[:100])
 np.savez('prediction.npz',test_p)
 
 
