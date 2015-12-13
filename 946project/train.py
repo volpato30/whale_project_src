@@ -103,9 +103,9 @@ def main(num_epochs=100):
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
 
-    l2_penalty = regularize_layer_params(network, l2)
-    network = build_cnn(input_var)
     
+    network = build_cnn(input_var)
+    l2_penalty = regularize_layer_params(network, l2)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
     prediction = lasagne.layers.get_output(network)
