@@ -29,4 +29,4 @@ for file in fname:
         test_data[j]=a
         j+=1
 
-np.savez("/scratch/rqiao/946project/test_data.npz",test_data)
+np.savez("/scratch/rqiao/946project/test_data_v2.npz",test_data)
