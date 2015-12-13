@@ -186,7 +186,7 @@ def main(num_epochs=100):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_acc / val_batches > best_acc:
-            np.savez('IMDBbestaccmodel.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('IMDBbestaccmodel_v2.npz', *lasagne.layers.get_all_param_values(network))
             best_acc=val_acc / val_batches
             test_err = 0
             test_acc = 0
