@@ -104,5 +104,5 @@ output_layer = net['prob']
 values = pickle.load(open('blvc_googlenet.pkl'))
 lasagne.layers.set_all_param_values(output_layer, values)
 
-
+print('successfully read in weights')
 
