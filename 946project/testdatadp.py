@@ -19,15 +19,14 @@ fname=[]
 for i in seq:
     fname.append(dname[i])
 
-test_data=np.zeros((1,1,500,300),dtype=np.float32)
+test_data=np.zeros((25000,1,500,300),dtype=np.float32)
+j=0
 for file in fname:
     temp=sio.loadmat(file)
     for i in range(500):
         a=np.array(temp['tstvec'][i][0],dtype=np.float32)
-        a=a.reshape((1,1,500,300))
-        test_data=np.concatenate((test_data,a),axis=0)
-
-test_data=test_data[1:,:,:,:]
-
+        a=a.reshape((1,500,300))
+        test_data[j]=a
+        j+=1
 
 np.savez("/scratch/rqiao/946project/test_data.npz",test_data)

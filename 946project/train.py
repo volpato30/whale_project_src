@@ -28,15 +28,15 @@ gain=1
 bias=0
 
 
-def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
+def build_cnn(input_var=None,num_2xd=72,num_3xd=72,num_5xd=72,num_7xd=24):
     
     l_in = lasagne.layers.InputLayer(shape=(40, 1, 500, 300),
                                         input_var=input_var)
     out_layers = []
 
-    l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(4, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
        
-    m_2xd = lasagne.layers.MaxPool2DLayer(l_2xd, pool_size=(499, 1))
+    m_2xd = lasagne.layers.MaxPool2DLayer(l_2xd, pool_size=(497, 1))
 
     out_layers.append(m_2xd)
     
@@ -103,15 +103,15 @@ def main(num_epochs=100):
     # Create neural network model (depending on first command line parameter)
     print("Building model and compiling functions...")
 
-    #l2_penalty = regularize_layer_params(network, l2)
+    l2_penalty = regularize_layer_params(network, l2)
     network = build_cnn(input_var)
     
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    #loss = loss.mean()+0.09*l2_penalty
-    loss = loss.mean()
+    loss = loss.mean()+*l2_penalty
+    #loss = loss.mean()
 
 
     # We could add some weight decay as well here, see lasagne.regularization.
