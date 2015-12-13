@@ -28,17 +28,17 @@ gain=1
 bias=0
 
 
-def build_cnn(input_var=None,num_2xd=72,num_3xd=72,num_5xd=72,num_7xd=24):
+def build_cnn(input_var=None,num_4xd=72,num_3xd=72,num_5xd=72,num_7xd=48,num_11xd=24):
     
     l_in = lasagne.layers.InputLayer(shape=(250, 1, 500, 300),
                                         input_var=input_var)
     out_layers = []
 
-    l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(4, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_4xd = Conv2DLayer(l_in, num_filters=num_4xd, filter_size=(4, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
        
-    m_2xd = lasagne.layers.MaxPool2DLayer(l_2xd, pool_size=(497, 1))
+    m_4xd = lasagne.layers.MaxPool2DLayer(l_4xd, pool_size=(497, 1))
 
-    out_layers.append(m_2xd)
+    out_layers.append(m_4xd)
     
     l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         
@@ -58,7 +58,13 @@ def build_cnn(input_var=None,num_2xd=72,num_3xd=72,num_5xd=72,num_7xd=24):
 
     out_layers.append(m_7xd)
 
+    l_11xd = Conv2DLayer(l_in, num_filters=num_11xd, filter_size=(11, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+       
+    m_11xd = lasagne.layers.MaxPool2DLayer(l_11xd, pool_size=(490, 1)) 
 
+    out_layers.append(m_11xd)
+
+    
     l_out = lasagne.layers.concat(out_layers)
 
 
@@ -152,6 +158,8 @@ def main(num_epochs=100):
         train_err = 0
         train_batches = 0
         start_time = time.time()
+        if epoch % 12 == 11:
+            learnrate*=0.96
         updates = lasagne.updates.nesterov_momentum(
             loss, params, learning_rate=learnrate, momentum=0.9)
         for batch in iterate_minibatches(X_train, y_train, 250, shuffle=False):
@@ -196,4 +204,4 @@ def main(num_epochs=100):
         
 
 if __name__ == '__main__':
-        main(100)
+        main(200)

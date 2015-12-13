@@ -63,11 +63,11 @@ def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
 
 input_var = T.tensor4('inputs')
 network = build_cnn(input_var)
-with np.load('IMDB_model.npz') as f:
+with np.load('IMDBbestaccmodel.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
 lasagne.layers.set_all_param_values(network, param_values)
 
-test_data=np.load("/scratch/rqiao/946project/test_data.npz")['arr_0']
+test_data=np.load("/scratch/rqiao/946project/test_data_v2.npz")['arr_0']
 
 test_prediction = lasagne.layers.get_output(network, deterministic=True)
 
