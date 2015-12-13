@@ -1,5 +1,12 @@
 #!/opt/sharcnet/python/2.7.5/gcc/bin/python
-
+import sys
+import os
+import time
+import numpy as np
+import theano
+import theano.tensor as T
+import lasagne
+from lasagne.regularization import regularize_layer_params, l2
 from lasagne.layers import InputLayer
 from lasagne.layers import DenseLayer
 from lasagne.layers import ConcatLayer
@@ -97,5 +104,5 @@ output_layer = net['prob']
 values = pickle.load(open('blvc_googlenet.pkl'))
 lasagne.layers.set_all_param_values(output_layer, values)
 
-
+print('successfully read in weights')
 
