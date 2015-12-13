@@ -8,7 +8,10 @@ import theano
 import theano.tensor as T
 import lasagne
 from lasagne.regularization import regularize_layer_params, l2
+from lasagne.layers import LocalResponseNormalization2DLayer as LRNLayer
+from lasagne.layers import GlobalPoolLayer
 
+BATCHSIZE=100
 
 def load_data():
     
@@ -21,11 +24,16 @@ def load_data():
 
 Conv2DLayer = lasagne.layers.Conv2DLayer
 
-def inception_module(l_in, num_1x1, reduce_3x3, num_3x3, reduce_5x5, num_5x5, gain=1.0, bias=0):
+def inception_module(l_in,pool_filters, num_1x1, reduce_3x3, num_3x3, reduce_5x5, num_5x5, gain=1.0, bias=0):
     """
     inception module (without the 3x3s1 pooling and projection because that's difficult in Theano right now)
     """
     out_layers = []
+
+    if pool_filters > 0:
+        l_pool = lasagne.layers.MaxPool2DLayer(l_in, pool_size=3, stride=1, pad=1)
+        l_pool_reduced = lasagne.layers.NINLayer(l_pool, num_units=pool_filters, W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+        out_layers.append(l_pool_reduced)
 
     # 1x1
     if num_1x1 > 0:
@@ -57,50 +65,61 @@ def inception_module(l_in, num_1x1, reduce_3x3, num_3x3, reduce_5x5, num_5x5, ga
 
 def build_cnn(input_var=None):
     
-    network = lasagne.layers.InputLayer(shape=(10, 3, 256, 256),
+    network = lasagne.layers.InputLayer(shape=(BATCHSIZE, 3, 256, 256),
                                         input_var=input_var)
     
-    network = inception_module(
-            network, num_1x1=32, reduce_3x3=48, num_3x3=64, reduce_5x5=16, num_5x5=16,)
-    
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
+    network = Conv2DLayer(network, num_filters=64, filter_size=7, stride=2, pad=3)
 
-    network = inception_module(
-            network, num_1x1=64, reduce_3x3=64, num_3x3=96, reduce_5x5=16, num_5x5=48,)
-    
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
+    network = lasagne.layers.MaxPool2DLayer(network,pool_size=3, stride=2, ignore_border=False)
 
-    network = inception_module(
-            network, num_1x1=96, reduce_3x3=48, num_3x3=104, reduce_5x5=16, num_5x5=48,)
-    
-    network = inception_module(
-            network, num_1x1=80, reduce_3x3=56, num_3x3=112, reduce_5x5=24, num_5x5=64,)
+    network= LRNLayer(network, alpha=0.00002, k=1)
 
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
+    network = lasagne.layers.NINLayer(network, num_units=64, W=lasagne.init.Orthogonal(1), b=lasagne.init.Constant(0))
+    network = Conv2DLayer(network, 192, 3, pad=1)
+    network = LRNLayer(network, alpha=0.00002, k=1)
+    network = lasagne.layers.MaxPool2DLayer(network, pool_size=3, stride=2)
 
-    network = inception_module(
-            network, num_1x1=192, reduce_3x3=96, num_3x3=208, reduce_5x5=16, num_5x5=48,)
     
     network = inception_module(
-            network, num_1x1=160, reduce_3x3=112, num_3x3=224, reduce_5x5=24, num_5x5=64,)
+            network,pool_filters=32, num_1x1=64, reduce_3x3=96, num_3x3=128, reduce_5x5=16, num_5x5=32)
+    
+    network = inception_module(
+            network,pool_filters=64, num_1x1=128, reduce_3x3=128, num_3x3=192, reduce_5x5=32, num_5x5=96)
+    
+    network = lasagne.layers.MaxPool2DLayer(network, pool_size=3, stride=2)
 
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
 
     network = inception_module(
-            network, num_1x1=156, reduce_3x3=160, num_3x3=320, reduce_5x5=32, num_5x5=128,)
-    
-    network = lasagne.layers.MaxPool2DLayer(network, pool_size=(2, 2))
+            network,pool_filters=64, num_1x1=192, reduce_3x3=96, num_3x3=208, reduce_5x5=16, num_5x5=48)
 
+    network = inception_module(
+            network,pool_filters=64, num_1x1=160, reduce_3x3=112, num_3x3=224, reduce_5x5=24, num_5x5=64)
+
+    network = inception_module(
+            network,pool_filters=64, num_1x1=128, reduce_3x3=128, num_3x3=256, reduce_5x5=24, num_5x5=64)
+
+    network = inception_module(
+            network,pool_filters=64, num_1x1=112, reduce_3x3=144, num_3x3=288, reduce_5x5=32, num_5x5=64)
+
+    network = inception_module(
+            network,pool_filters=128, num_1x1=256, reduce_3x3=160, num_3x3=320, reduce_5x5=32, num_5x5=128)
+
+    network = lasagne.layers.MaxPool2DLayer(network, pool_size=3, stride=2)
+
+    network = inception_module(
+            network,pool_filters=128, num_1x1=256, reduce_3x3=160, num_3x3=320, reduce_5x5=32, num_5x5=128)
+
+    network = inception_module(
+            network,pool_filters=128, num_1x1=384, reduce_3x3=192, num_3x3=384, reduce_5x5=48, num_5x5=128)
+
+    network = GlobalPoolLayer(network)
 
     network = lasagne.layers.DenseLayer(
-            lasagne.layers.dropout(network, p=.5),
-            num_units=256,
-            nonlinearity=lasagne.nonlinearities.rectify)
-
-    network = lasagne.layers.DenseLayer(
-            lasagne.layers.dropout(network, p=.5),
+            lasagne.layers.dropout(network, p=.4),
             num_units=344,
-            nonlinearity=lasagne.nonlinearities.softmax)
+            nonlinearity=lasagne.nonlinearities.linear)
+
+    network = lasagne.layers.NonlinearityLayer(network,nonlinearity=lasagne.nonlinearities.softmax)
 
     return network
 
@@ -166,10 +185,8 @@ def main(num_epochs=100):
     # Compile a second function computing the validation loss and accuracy:
     val_fn = theano.function([input_var, target_var], [test_loss, test_acc])
 
-    patience=200
-    patience_increase=2.5
     best_val_loss=10
-    improvement_threshold=0.98
+    improvement_threshold=0.999
     best_acc=0
     # Finally, launch the training loop.
     print("Starting training...")
@@ -183,7 +200,7 @@ def main(num_epochs=100):
             learnrate*=0.96
         updates = lasagne.updates.nesterov_momentum(
             loss, params, learning_rate=learnrate, momentum=0.9)
-        for batch in iterate_minibatches(X_train, y_train, 10, shuffle=False):
+        for batch in iterate_minibatches(X_train, y_train,BATCHSIZE, shuffle=False):
             inputs, targets = batch
             train_err += train_fn(inputs, targets)
             train_batches += 1
@@ -192,7 +209,7 @@ def main(num_epochs=100):
         val_err = 0
         val_acc = 0
         val_batches = 0
-        for batch in iterate_minibatches(X_val, y_val, 10, shuffle=False):
+        for batch in iterate_minibatches(X_val, y_val, BATCHSIZE, shuffle=False):
             inputs, targets = batch
             err, acc = val_fn(inputs, targets)
             val_err += err
@@ -207,23 +224,15 @@ def main(num_epochs=100):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            patience = max(patience, epoch * patience_increase)
-            np.savez('best_model_omit5.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5_v2.npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
 
         if val_acc / val_batches>best_acc:
             best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_classification_model_omit5_v2.npz', *lasagne.layers.get_all_param_values(network))
             print('                    saved best classification  model')
 
-        if patience<epoch:
-            print("early stop because no significant improvement")
-            break
-
-    # Optionally, you could now dump the network weights to a file like this:
-    
-    #
     # And load them again later on like this:
     # with np.load('model.npz') as f:
     #     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
@@ -231,4 +240,4 @@ def main(num_epochs=100):
 
 
 if __name__ == '__main__':
-        main(500)
+        main(200)
