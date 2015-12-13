@@ -30,7 +30,7 @@ bias=0
 
 def build_cnn(input_var=None,num_2xd=72,num_3xd=72,num_5xd=72,num_7xd=24):
     
-    l_in = lasagne.layers.InputLayer(shape=(40, 1, 500, 300),
+    l_in = lasagne.layers.InputLayer(shape=(250, 1, 500, 300),
                                         input_var=input_var)
     out_layers = []
 
