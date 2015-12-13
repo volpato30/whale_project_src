@@ -100,9 +100,8 @@ def build_model():
 
 
 net = build_model()
-output_layer = net['prob']
 values = pickle.load(open('blvc_googlenet.pkl'))
-lasagne.layers.set_all_param_values(output_layer, values)
+lasagne.layers.set_all_param_values(net, values)
 
 print('successfully read in weights')
 
