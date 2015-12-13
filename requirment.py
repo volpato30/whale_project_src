@@ -1,3 +1,4 @@
+#!/opt/sharcnet/python/2.7.5/gcc/bin/python
 
 from lasagne.layers import InputLayer
 from lasagne.layers import DenseLayer
