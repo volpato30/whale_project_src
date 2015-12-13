@@ -83,7 +83,7 @@ fn = theano.function([input_var], [pred])
 
 test_p=np.zeros(25000,dtype=np.int16)
 for i in range(25000):
-    test_p[i]=fn(test_data[i,:,:,:].reshape(1,1,500,300))[0].flatten
+    test_p[i]=fn(test_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
 
 print(test_p[:100])
 np.savez('prediction.npz',test_p)
