@@ -14,17 +14,17 @@ dimension=300
 gain=1
 bias=0
 
-def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
+def build_cnn(input_var=None,num_4xd=72,num_3xd=72,num_5xd=72,num_7xd=48,num_11xd=24):
     
-    l_in = lasagne.layers.InputLayer(shape=(1, 1, 500, 300),
+    l_in = lasagne.layers.InputLayer(shape=(250, 1, 500, 300),
                                         input_var=input_var)
     out_layers = []
 
-    l_2xd = Conv2DLayer(l_in, num_filters=num_2xd, filter_size=(2, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_4xd = Conv2DLayer(l_in, num_filters=num_4xd, filter_size=(4, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
        
-    m_2xd = lasagne.layers.MaxPool2DLayer(l_2xd, pool_size=(499, 1))
+    m_4xd = lasagne.layers.MaxPool2DLayer(l_4xd, pool_size=(497, 1))
 
-    out_layers.append(m_2xd)
+    out_layers.append(m_4xd)
     
     l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
         
@@ -44,17 +44,23 @@ def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
 
     out_layers.append(m_7xd)
 
+    l_11xd = Conv2DLayer(l_in, num_filters=num_11xd, filter_size=(11, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+       
+    m_11xd = lasagne.layers.MaxPool2DLayer(l_11xd, pool_size=(490, 1)) 
 
+    out_layers.append(m_11xd)
+
+    
     l_out = lasagne.layers.concat(out_layers)
 
 
     network = lasagne.layers.DenseLayer(
-            l_out,
+            lasagne.layers.dropout(l_out, p=.5),
             num_units=256,
             nonlinearity=lasagne.nonlinearities.tanh)
 
     network = lasagne.layers.DenseLayer(
-            network,
+            lasagne.layers.dropout(network, p=.5),
             num_units=2,
             nonlinearity=lasagne.nonlinearities.softmax)
 
@@ -63,7 +69,7 @@ def build_cnn(input_var=None,num_2xd=50,num_3xd=48,num_5xd=32,num_7xd=24):
 
 input_var = T.tensor4('inputs')
 network = build_cnn(input_var)
-with np.load('IMDBbestaccmodel.npz') as f:
+with np.load('IMDBbestaccmodel_v2.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
 lasagne.layers.set_all_param_values(network, param_values)
 
