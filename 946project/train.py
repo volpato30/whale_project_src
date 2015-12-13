@@ -110,7 +110,7 @@ def main(num_epochs=100):
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()+*l2_penalty
+    loss = loss.mean()+l2_penalty
     #loss = loss.mean()
 
 
