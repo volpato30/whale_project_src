@@ -11,7 +11,7 @@ from lasagne.regularization import regularize_layer_params, l2
 from lasagne.layers import LocalResponseNormalization2DLayer as LRNLayer
 from lasagne.layers import GlobalPoolLayer
 
-BATCHSIZE=100
+BATCHSIZE=12
 
 def load_data():
     
