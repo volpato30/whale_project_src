@@ -76,9 +76,6 @@ lasagne.layers.set_all_param_values(network, param_values)
 
 test_data=np.load("/scratch/rqiao/IMDB.npz")['arr_0']
 
-
-pred=T.argmax(test_prediction, axis=1)
-
 fn = theano.function([input_var], [lout])
 
 test_p=np.zeros((25000,288),dtype=np.float32)
