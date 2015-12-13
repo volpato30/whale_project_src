@@ -75,12 +75,11 @@ pred=T.argmax(test_prediction, axis=1)
 
 fn = theano.function([input_var], [pred])
 
-test_p=[]
+test_p=np.zeros(25000,dtype=np.int16)
 for i in range(25000):
-    test_p.append(fn(test_data[i,:,:,:].reshape(1,1,500,300)))
+    test_p[i]=fn(test_data[i,:,:,:].reshape(1,1,500,300)).flatten
 
-test_p=np.array(test_p,dtype=np.int16)
-print(test_p[:10])
+print(test_p[:100])
 np.savez('prediction.npz',test_p)
 
 
