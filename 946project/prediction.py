@@ -14,9 +14,9 @@ dimension=300
 gain=1
 bias=0
 
-def build_cnn(input_var=None,num_4xd=72,num_3xd=72,num_5xd=72,num_7xd=48,num_11xd=24):
+def build_cnn(input_var=None,num_4xd=108,num_3xd=108,num_5xd=108,num_7xd=72,num_11xd=72):
     
-    l_in = lasagne.layers.InputLayer(shape=(250, 1, 500, 300),
+    l_in = lasagne.layers.InputLayer(shape=(1, 1, 500, 300),
                                         input_var=input_var)
     out_layers = []
 
@@ -56,7 +56,7 @@ def build_cnn(input_var=None,num_4xd=72,num_3xd=72,num_5xd=72,num_7xd=48,num_11x
 
     network = lasagne.layers.DenseLayer(
             lasagne.layers.dropout(l_out, p=.5),
-            num_units=256,
+            num_units=512,
             nonlinearity=lasagne.nonlinearities.tanh)
 
     network = lasagne.layers.DenseLayer(
@@ -69,7 +69,7 @@ def build_cnn(input_var=None,num_4xd=72,num_3xd=72,num_5xd=72,num_7xd=48,num_11x
 
 input_var = T.tensor4('inputs')
 network = build_cnn(input_var)
-with np.load('IMDBbestaccmodel_v2.npz') as f:
+with np.load('IMDBbestaccmodel_v3.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
 lasagne.layers.set_all_param_values(network, param_values)
 
