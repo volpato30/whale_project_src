@@ -91,7 +91,7 @@ for i in range(25000):
     test_p[i,:]=fn(test_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
 
 
-sio.savemat('extracted_featrue.mat', {'arr': test_p})
+sio.savemat('extracted_featrue_test.mat', {'arr': test_p})
 
 
 
