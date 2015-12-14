@@ -1,0 +1,3 @@
+Using gpu device 0: Tesla K20m (CNMeM is disabled)
+/opt/sharcnet/python/2.7.5/gcc/lib/python2.7/site-packages/scipy/io/matlab/mio.py:267: FutureWarning: Using oned_as default value ('column') This will change to 'row' in future versions
+  oned_as=oned_as)
