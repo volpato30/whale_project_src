@@ -88,9 +88,9 @@ test_p=np.zeros((25000,288),dtype=np.float32)
 for i in range(20000):
     test_p[i,:]=fn(train_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
 for i in range(2500):
-    test_p[i+20000,:]=fn(valid_data[i+20000,:,:,:].reshape(1,1,500,300))[0].flatten()
+    test_p[i+20000,:]=fn(valid_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
 for i in range(2500):
-    test_p[i+22500,:]=fn(test_data[i+22500,:,:,:].reshape(1,1,500,300))[0].flatten()
+    test_p[i+22500,:]=fn(test_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
 
 
 
