@@ -34,31 +34,31 @@ def build_cnn(input_var=None,num_4xd=108,num_3xd=108,num_5xd=108,num_7xd=72,num_
                                         input_var=input_var)
     out_layers = []
 
-    l_4xd = Conv2DLayer(l_in, num_filters=num_4xd, filter_size=(4, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_4xd = Conv2DLayer(l_in, num_filters=num_4xd, filter_size=(4, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias),nonlinearity=lasagne.nonlinearities.tanh)
        
     m_4xd = lasagne.layers.MaxPool2DLayer(l_4xd, pool_size=(497, 1))
 
     out_layers.append(m_4xd)
     
-    l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_3xd = Conv2DLayer(l_in, num_filters=num_3xd, filter_size=(3, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias),nonlinearity=lasagne.nonlinearities.tanh)
         
     m_3xd = lasagne.layers.MaxPool2DLayer(l_3xd, pool_size=(498, 1))
 
     out_layers.append(m_3xd)
 
-    l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_5xd = Conv2DLayer(l_in, num_filters=num_5xd, filter_size=(5, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias),nonlinearity=lasagne.nonlinearities.tanh)
        
     m_5xd = lasagne.layers.MaxPool2DLayer(l_5xd, pool_size=(496, 1)) 
 
     out_layers.append(m_5xd)
 
-    l_7xd = Conv2DLayer(l_in, num_filters=num_7xd, filter_size=(7, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_7xd = Conv2DLayer(l_in, num_filters=num_7xd, filter_size=(7, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias),nonlinearity=lasagne.nonlinearities.tanh)
        
     m_7xd = lasagne.layers.MaxPool2DLayer(l_7xd, pool_size=(494, 1)) 
 
     out_layers.append(m_7xd)
 
-    l_11xd = Conv2DLayer(l_in, num_filters=num_11xd, filter_size=(11, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias))
+    l_11xd = Conv2DLayer(l_in, num_filters=num_11xd, filter_size=(11, dimension), W=lasagne.init.Orthogonal(gain), b=lasagne.init.Constant(bias),nonlinearity=lasagne.nonlinearities.tanh)
        
     m_11xd = lasagne.layers.MaxPool2DLayer(l_11xd, pool_size=(490, 1)) 
 
@@ -186,7 +186,7 @@ def main(num_epochs=100):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_acc / val_batches > best_acc:
-            np.savez('IMDBbestaccmodel_v3.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('IMDBbestaccmodel_v4.npz', *lasagne.layers.get_all_param_values(network))
             best_acc=val_acc / val_batches
             test_err = 0
             test_acc = 0
@@ -204,4 +204,4 @@ def main(num_epochs=100):
         
 
 if __name__ == '__main__':
-        main(800)
+        main(300)
