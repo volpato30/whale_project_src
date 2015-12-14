@@ -76,7 +76,7 @@ lasagne.layers.set_all_param_values(network, param_values)
 
 test_data=np.load("/scratch/rqiao/IMDB.npz")['arr_0']
 
-fn = theano.function([input_var], [l_out])
+fn = theano.function([input_var], [lasagne.layers.get_output(l_out)])
 
 test_p=np.zeros((25000,288),dtype=np.float32)
 for i in range(25000):
