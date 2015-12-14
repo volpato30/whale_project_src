@@ -111,12 +111,16 @@ def main(num_epochs=100):
 
     
     network = build_cnn(input_var)
+    with np.load('IMDBbestaccmodel_v3.npz') as f:
+        param_values = [f['arr_%d' % i] for i in range(len(f.files))]
+    lasagne.layers.set_all_param_values(network, param_values)
+
     l2_penalty = regularize_layer_params(network, l2)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()+l2_penalty
+    loss = loss.mean()+3*l2_penalty
     #loss = loss.mean()
 
 
@@ -204,4 +208,4 @@ def main(num_epochs=100):
         
 
 if __name__ == '__main__':
-        main(300)
+        main(200)
