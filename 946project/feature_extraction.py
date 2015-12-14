@@ -74,13 +74,25 @@ with np.load('IMDBbestaccmodel_v2.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
 lasagne.layers.set_all_param_values(network, param_values)
 
-test_data=np.load("/scratch/rqiao/IMDB.npz")['arr_0']
+a=np.load("/scratch/rqiao/IMDB.npz")
+train_data=a['arr_0']
+
+valid_data=a['arr_2']
+
+test_data=a['arr_4']
+
 
 fn = theano.function([input_var], [lasagne.layers.get_output(l_out)])
 
 test_p=np.zeros((25000,288),dtype=np.float32)
-for i in range(25000):
-    test_p[i,:]=fn(test_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
+for i in range(20000):
+    test_p[i,:]=fn(train_data[i,:,:,:].reshape(1,1,500,300))[0].flatten()
+for i in range(2500):
+    test_p[i+20000,:]=fn(valid_data[i+20000,:,:,:].reshape(1,1,500,300))[0].flatten()
+for i in range(2500):
+    test_p[i+22500,:]=fn(test_data[i+22500,:,:,:].reshape(1,1,500,300))[0].flatten()
+
+
 
 sio.savemat('extracted_featrue.mat', {'arr': test_p})
 
