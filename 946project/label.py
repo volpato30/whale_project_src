@@ -13,8 +13,8 @@ test_p=np.zeros(25000,dtype=np.int16)
 for i in range(20000):
     test_p[i]=train_target[i]
 for i in range(2500):
-    test_p[i+20000,:]=valid_target[i]
+    test_p[i+20000]=valid_target[i]
 for i in range(2500):
-    test_p[i+22500,:]=test_target[i]
+    test_p[i+22500]=test_target[i]
 
 sio.savemat('label.mat', {'label': test_p})
