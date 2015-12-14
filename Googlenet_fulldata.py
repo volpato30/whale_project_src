@@ -16,39 +16,54 @@ BATCHSIZE=20
 def load_data(version='resize'):
     if version=='resize':
         a=np.load("/scratch/rqiao/full_data/resize_dataOmit5.npz")
-        train_data=a['arr_0']
-        train_target=a['arr_1']
-        valid_data=a['arr_2']
-        valid_target=a['arr_3']
-        return train_data,train_target,valid_data,valid_target
+        data=a['arr_0']
+        target=a['arr_1']
+        length=len(target)
+        arr=np.arange(length)
+        np.random.shuffle(arr)
+        train_i=arr[:int(np.floor(length*0.9))]
+        valid_i=arr[int(np.floor(length*0.9)):]
+        return data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i]
     if version=='flipx':
         a=np.load("/scratch/rqiao/full_data/FlipX_dataOmit5.npz")
-        train_data=a['arr_0']
-        train_target=a['arr_1']
-        valid_data=a['arr_2']
-        valid_target=a['arr_3']
-        return train_data,train_target,valid_data,valid_target
+        data=a['arr_0']
+        target=a['arr_1']
+        length=len(target)
+        arr=np.arange(length)
+        np.random.shuffle(arr)
+        train_i=arr[:int(np.floor(length*0.9))]
+        valid_i=arr[int(np.floor(length*0.9)):]
+        return data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i]
     if version=='r180':
         a=np.load("/scratch/rqiao/full_data/Rotate180.npz")
-        train_data=a['arr_0']
-        train_target=a['arr_1']
-        valid_data=a['arr_2']
-        valid_target=a['arr_3']
-        return train_data,train_target,valid_data,valid_target
+        data=a['arr_0']
+        target=a['arr_1']
+        length=len(target)
+        arr=np.arange(length)
+        np.random.shuffle(arr)
+        train_i=arr[:int(np.floor(length*0.9))]
+        valid_i=arr[int(np.floor(length*0.9)):]
+        return data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i]
     if version=='r90':
         a=np.load("/scratch/rqiao/full_data/Rotate90_dataOmit5.npz")
-        train_data=a['arr_0']
-        train_target=a['arr_1']
-        valid_data=a['arr_2']
-        valid_target=a['arr_3']
-        return train_data,train_target,valid_data,valid_target
+        data=a['arr_0']
+        target=a['arr_1']
+        length=len(target)
+        arr=np.arange(length)
+        np.random.shuffle(arr)
+        train_i=arr[:int(np.floor(length*0.9))]
+        valid_i=arr[int(np.floor(length*0.9)):]
+        return data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i]
     if version=='r270':
         a=np.load("/scratch/rqiao/full_data/Rotate270.npz")
-        train_data=a['arr_0']
-        train_target=a['arr_1']
-        valid_data=a['arr_2']
-        valid_target=a['arr_3']
-        return train_data,train_target,valid_data,valid_target
+        data=a['arr_0']
+        target=a['arr_1']
+        length=len(target)
+        arr=np.arange(length)
+        np.random.shuffle(arr)
+        train_i=arr[:int(np.floor(length*0.9))]
+        valid_i=arr[int(np.floor(length*0.9)):]
+        return data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i]
 
 Conv2DLayer = lasagne.layers.Conv2DLayer
 
