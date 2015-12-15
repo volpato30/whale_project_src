@@ -138,54 +138,59 @@ def get_img(iname):
 
 os.chdir('/scratch/rqiao/Fin/Resize')
 
-test_p=[]
+test_p=np.zeros((6925,344),dtype=np.float32)
+j=0
 for i in name['Image']:
     a=get_img(i)
-    test_p.append(pred_fn(a))
+    test_p[j]=pred_fn(a).flatten()
+    j+=1
 
-print(test_p[:10])
 np.savez('/home/rqiao/backup/modelv3_Resize.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate90')
 
-test_p=[]
+test_p=np.zeros((6925,344),dtype=np.float32)
+j=0
 for i in name['Image']:
     a=get_img(i)
-    test_p.append(pred_fn(a))
+    test_p[j]=pred_fn(a).flatten()
+    j+=1
 
-print(test_p[:10])
 np.savez('/home/rqiao/backup/modelv3_Rotate90.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate180')
 
-test_p=[]
+test_p=np.zeros((6925,344),dtype=np.float32)
+j=0
 for i in name['Image']:
     a=get_img(i)
-    test_p.append(pred_fn(a))
+    test_p[j]=pred_fn(a).flatten()
+    j+=1
 
-print(test_p[:10])
 np.savez('/home/rqiao/backup/modelv3_Rotate180.npz',test_p)
 
 
 os.chdir('/scratch/rqiao/Fin/Rotate270')
 
-test_p=[]
+test_p=np.zeros((6925,344),dtype=np.float32)
+j=0
 for i in name['Image']:
     a=get_img(i)
-    test_p.append(pred_fn(a))
+    test_p[j]=pred_fn(a).flatten()
+    j+=1
 
-print(test_p[:10])
 np.savez('/home/rqiao/backup/modelv3_Rotate270.npz',test_p)
 
 
 os.chdir('/scratch/rqiao/Fin/FlipX')
 
-test_p=[]
+test_p=np.zeros((6925,344),dtype=np.float32)
+j=0
 for i in name['Image']:
     a=get_img(i)
-    test_p.append(pred_fn(a))
+    test_p[j]=pred_fn(a).flatten()
+    j+=1
 
-print(test_p[:10])
 np.savez('/home/rqiao/backup/modelv3_FlipX.npz',test_p)
 
 
