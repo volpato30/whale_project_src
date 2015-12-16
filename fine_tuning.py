@@ -229,7 +229,7 @@ def main(num_epochs=50):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('fine_tuned_model.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('fine_tuned_modelv3.npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
 
