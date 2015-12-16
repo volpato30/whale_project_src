@@ -142,7 +142,7 @@ def iterate_minibatches(inputs, targets, batchsize, shuffle=False):
 def main(num_epochs=50):
     # Load the dataset
     print("Loading data...")
-    datasets = load_data('resize')
+    datasets = load_data()
     X_train, y_train = datasets[0], datasets[1]
     X_val, y_val = datasets[2], datasets[3]
     # Prepare Theano variables for inputs and targets
@@ -162,7 +162,7 @@ def main(num_epochs=50):
     l2_penalty = regularize_layer_params(network, l2)
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()+0.5*l2_penalty
+    loss = loss.mean()+0.7*l2_penalty
     # We could add some weight decay as well here, see lasagne.regularization.
 
     # Create update expressions for training, i.e., how to modify the
