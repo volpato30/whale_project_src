@@ -16,7 +16,7 @@ BATCHSIZE=60
 
 def load_data():
     
-    a=np.load("/scratch/rqiao/whale_fulldata.npz")
+    a=np.load("/scratch/rqiao/full_dataOmit5.npz")
     train_data=a['arr_0']
     train_target=a['arr_1']
     valid_data=a['arr_2']
