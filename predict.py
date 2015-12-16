@@ -127,7 +127,7 @@ prediction = lasagne.layers.get_output(network,deterministic=True)
 
 pred_fn = theano.function([input_var],prediction)
 
-name=pd.read_csv('/home/rqiao/backup/sample_submission.csv',usecols=[0])
+name=pd.read_csv('/home/rqiao/predict/sample_submission.csv',usecols=[0])
 
 def get_img(iname):
     temp=Image.open(iname)
@@ -144,7 +144,7 @@ for i in name['Image']:
     test_p.append(pred_fn(a))
 
 print(test_p[:10])
-np.savez('/home/rqiao/backup/modelv3_Resize.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3_Resize.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate90')
 
@@ -154,7 +154,7 @@ for i in name['Image']:
     test_p.append(pred_fn(a))
 
 print(test_p[:10])
-np.savez('/home/rqiao/backup/modelv3_Rotate90.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3_Rotate90.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate180')
 
@@ -164,7 +164,7 @@ for i in name['Image']:
     test_p.append(pred_fn(a))
 
 print(test_p[:10])
-np.savez('/home/rqiao/backup/modelv3_Rotate180.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3_Rotate180.npz',test_p)
 
 
 os.chdir('/scratch/rqiao/Fin/Rotate270')
@@ -175,7 +175,7 @@ for i in name['Image']:
     test_p.append(pred_fn(a))
 
 print(test_p[:10])
-np.savez('/home/rqiao/backup/modelv3_Rotate270.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3_Rotate270.npz',test_p)
 
 
 os.chdir('/scratch/rqiao/Fin/FlipX')
@@ -186,7 +186,7 @@ for i in name['Image']:
     test_p.append(pred_fn(a))
 
 print(test_p[:10])
-np.savez('/home/rqiao/backup/modelv3_FlipX.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3_FlipX.npz',test_p)
 
 
 
