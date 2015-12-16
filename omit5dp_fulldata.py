@@ -39,17 +39,29 @@ for i in range(len(w_seq)):
         continue
     Imgname.append(list(Iname[ids==w_seq[i]]))
 
-target=[]
-data=np.zeros((1,3,256,256),dtype=np.float32)
+
+length=4288
+arr=np.arange(length)
+np.random.shuffle(arr)
+train_i=arr[:int(np.floor(length*0.9))]
+valid_i=arr[int(np.floor(length*0.9)):]
+train_i=np.concatenate((train_i,train_i+length,train_i+length*2,train_i+length*3,train_i+length*4))
+valid_i=np.concatenate((valid_i,valid_i+length,valid_i+length*2,valid_i+length*3,valid_i+length*4))
+
+
+target=np.zeros(length*5,dtype=np.int16)
+data=np.zeros((length*5,3,256,256),dtype=np.float32)
 os.chdir('/scratch/rqiao/Fin/Resize')
+j=0
 for i in range(len(Imgname)):
     for file in Imgname[i]:
         temp=Image.open(file)
         aray=np.array(temp,dtype=np.float32)
         aray=np.rollaxis(aray,2)
-        aray=aray.reshape(1,3,256,256)
-        data=np.concatenate((data,aray),0)
-        target.append(i)           
+        aray=aray.reshape(3,256,256)
+        data[j,:,:,:]=aray
+        target[j]=i
+        j+=1           
 
 os.chdir('/scratch/rqiao/Fin/FlipX')
 for i in range(len(Imgname)):
@@ -57,9 +69,10 @@ for i in range(len(Imgname)):
         temp=Image.open(file)
         aray=np.array(temp,dtype=np.float32)
         aray=np.rollaxis(aray,2)
-        aray=aray.reshape(1,3,256,256)
-        data=np.concatenate((data,aray),0)
-        target.append(i)           
+        aray=aray.reshape(3,256,256)
+        data[j,:,:,:]=aray
+        target[j]=i
+        j+=1           
 
 os.chdir('/scratch/rqiao/Fin/Rotate90')
 for i in range(len(Imgname)):
@@ -67,9 +80,10 @@ for i in range(len(Imgname)):
         temp=Image.open(file)
         aray=np.array(temp,dtype=np.float32)
         aray=np.rollaxis(aray,2)
-        aray=aray.reshape(1,3,256,256)
-        data=np.concatenate((data,aray),0)
-        target.append(i)           
+        aray=aray.reshape(3,256,256)
+        data[j,:,:,:]=aray
+        target[j]=i
+        j+=1           
 
 os.chdir('/scratch/rqiao/Fin/Rotate180')
 for i in range(len(Imgname)):
@@ -77,9 +91,10 @@ for i in range(len(Imgname)):
         temp=Image.open(file)
         aray=np.array(temp,dtype=np.float32)
         aray=np.rollaxis(aray,2)
-        aray=aray.reshape(1,3,256,256)
-        data=np.concatenate((data,aray),0)
-        target.append(i)           
+        aray=aray.reshape(3,256,256)
+        data[j,:,:,:]=aray
+        target[j]=i
+        j+=1           
 
 os.chdir('/scratch/rqiao/Fin/Rotate270')
 for i in range(len(Imgname)):
@@ -87,19 +102,14 @@ for i in range(len(Imgname)):
         temp=Image.open(file)
         aray=np.array(temp,dtype=np.float32)
         aray=np.rollaxis(aray,2)
-        aray=aray.reshape(1,3,256,256)
-        data=np.concatenate((data,aray),0)
-        target.append(i)         
+        aray=aray.reshape(3,256,256)
+        data[j,:,:,:]=aray
+        target[j]=i
+        j+=1           
 
-
-data=data[1:,:,:,:]
 data=data/128.0
-target=np.array(target,dtype=np.int16)
-length=len(target)
-arr=np.arange(length)
-np.random.shuffle(arr)
-train_i=arr[:int(np.floor(length*0.9))]
-valid_i=arr[int(np.floor(length*0.9)):]
+
+
 np.savez("/scratch/rqiao/full_dataOmit5.npz",data[train_i,:,:,:],target[train_i],data[valid_i,:,:,:],target[valid_i])
 
 print("successful done")

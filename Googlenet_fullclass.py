@@ -154,9 +154,6 @@ def main(num_epochs=50):
     network = build_cnn(input_var)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
-    with np.load('best_model_omit5_v3.npz') as f:
-        param_values = [f['arr_%d' % i] for i in range(len(f.files))]
-    lasagne.layers.set_all_param_values(network, param_values)
 
     l2_penalty = regularize_layer_params(network, l2)
     prediction = lasagne.layers.get_output(network)
