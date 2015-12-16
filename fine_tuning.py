@@ -11,7 +11,7 @@ from lasagne.regularization import regularize_layer_params, l2
 from lasagne.layers import LocalResponseNormalization2DLayer as LRNLayer
 from lasagne.layers import GlobalPoolLayer
 
-BATCHSIZE=60
+BATCHSIZE=80
 
 
 def load_data():
@@ -155,7 +155,7 @@ def main(num_epochs=50):
     network = build_cnn(input_var)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
-    with np.load('best_model_omit5_v3.npz') as f:
+    with np.load('best_model_omit5_v4.npz') as f:
         param_values = [f['arr_%d' % i] for i in range(len(f.files))]
     lasagne.layers.set_all_param_values(network, param_values)
 
@@ -229,14 +229,9 @@ def main(num_epochs=50):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('best_model_omit5_v5.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('fine_tuned_model.npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
-
-        if val_acc / val_batches>best_acc:
-            best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5_v5.npz', *lasagne.layers.get_all_param_values(network))
-            print('                    saved best classification  model')
 
     
     # And load them again later on like this:
