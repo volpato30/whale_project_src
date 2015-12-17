@@ -119,7 +119,7 @@ def build_cnn(input_var=None):
 
 input_var = T.tensor4('inputs')
 network = build_cnn(input_var)
-with np.load('best_model_omit5_v4.npz') as f:
+with np.load('fine_tuned_modelv3.npz') as f:
     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
 lasagne.layers.set_all_param_values(network, param_values)
 
@@ -145,7 +145,7 @@ for i in name['Image']:
     test_p[j]=pred_fn(a).flatten()
     j+=1
 
-np.savez('/home/rqiao/predict/modelv4_Resize.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3(3)_Resize.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate90')
 
@@ -156,7 +156,7 @@ for i in name['Image']:
     test_p[j]=pred_fn(a).flatten()
     j+=1
 
-np.savez('/home/rqiao/predict/modelv4_Rotate90.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3(3)_Rotate90.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate180')
 
@@ -167,7 +167,7 @@ for i in name['Image']:
     test_p[j]=pred_fn(a).flatten()
     j+=1
 
-np.savez('/home/rqiao/predict/modelv4_Rotate180.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3(3)_Rotate180.npz',test_p)
 
 
 os.chdir('/scratch/rqiao/Fin/Rotate270')
@@ -179,7 +179,7 @@ for i in name['Image']:
     test_p[j]=pred_fn(a).flatten()
     j+=1
 
-np.savez('/home/rqiao/predict/modelv4_Rotate270.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3(3)_Rotate270.npz',test_p)
 
 
 os.chdir('/scratch/rqiao/Fin/FlipX')
@@ -191,7 +191,7 @@ for i in name['Image']:
     test_p[j]=pred_fn(a).flatten()
     j+=1
 
-np.savez('/home/rqiao/predict/modelv4_FlipX.npz',test_p)
+np.savez('/home/rqiao/predict/modelv3(3)_FlipX.npz',test_p)
 
 
 
