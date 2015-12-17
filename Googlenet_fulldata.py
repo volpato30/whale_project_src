@@ -11,7 +11,7 @@ from lasagne.regularization import regularize_layer_params, l2
 from lasagne.layers import LocalResponseNormalization2DLayer as LRNLayer
 from lasagne.layers import GlobalPoolLayer
 
-BATCHSIZE=20
+BATCHSIZE=60
 
 def load_data(version='resize'):
     if version=='resize':
@@ -197,10 +197,15 @@ def main(num_epochs=10):
     network = build_cnn(input_var)
     # Create a loss expression for training, i.e., a scalar objective we want
     # to minimize (for our multi-class problem, it is the cross-entropy loss):
+    with np.load('best_model_omit5_v3.npz') as f:
+        param_values = [f['arr_%d' % i] for i in range(len(f.files))]
+    lasagne.layers.set_all_param_values(network, param_values)
+
+
     l2_penalty = regularize_layer_params(network, l2)
     prediction = lasagne.layers.get_output(network)
     loss = lasagne.objectives.categorical_crossentropy(prediction, target_var)
-    loss = loss.mean()+0.01*l2_penalty
+    loss = loss.mean()+l2_penalty
     # We could add some weight decay as well here, see lasagne.regularization.
 
     # Create update expressions for training, i.e., how to modify the
@@ -267,14 +272,9 @@ def main(num_epochs=10):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('best_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5_v3(2).npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
-
-        if val_acc / val_batches>best_acc:
-            best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
-            print('                    saved best classification  model')
 
     datasets = load_data('flipx')
     X_train, y_train = datasets[0], datasets[1]
@@ -313,15 +313,11 @@ def main(num_epochs=10):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('best_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5_v3(2).npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
 
-        if val_acc / val_batches>best_acc:
-            best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
-            print('                    saved best classification  model')
-
+    
     datasets = load_data('r90')
     X_train, y_train = datasets[0], datasets[1]
     X_val, y_val = datasets[2], datasets[3]
@@ -359,14 +355,9 @@ def main(num_epochs=10):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('best_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5_v3(2).npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
-
-        if val_acc / val_batches>best_acc:
-            best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
-            print('                    saved best classification  model')
 
     datasets = load_data('r180')
     X_train, y_train = datasets[0], datasets[1]
@@ -405,14 +396,9 @@ def main(num_epochs=10):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('best_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5_v3(2).npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
-
-        if val_acc / val_batches>best_acc:
-            best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
-            print('                    saved best classification  model')
 
     datasets = load_data('r270')
     X_train, y_train = datasets[0], datasets[1]
@@ -451,16 +437,11 @@ def main(num_epochs=10):
         print("  validation accuracy:\t\t{:.2f} %".format(
             val_acc / val_batches * 100))
         if val_err/val_batches < best_val_loss*improvement_threshold:
-            np.savez('best_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
+            np.savez('best_model_omit5_v3(2).npz', *lasagne.layers.get_all_param_values(network))
             best_val_loss=val_err/val_batches
             print("                    best validation loss\t\t{:.6f}".format(best_val_loss))
 
-        if val_acc / val_batches>best_acc:
-            best_acc=val_acc / val_batches
-            np.savez('best_classification_model_omit5_v3.npz', *lasagne.layers.get_all_param_values(network))
-            print('                    saved best classification  model')
-
-
+        
     # And load them again later on like this:
     # with np.load('model.npz') as f:
     #     param_values = [f['arr_%d' % i] for i in range(len(f.files))]
