@@ -138,7 +138,7 @@ def get_img(iname):
 
 os.chdir('/scratch/rqiao/Fin/Resize')
 
-test_p=np.zeros((6925,344),dtype=np.float32)
+test_p=np.zeros((6925,447),dtype=np.float32)
 j=0
 for i in name['Image']:
     a=get_img(i)
@@ -149,7 +149,7 @@ np.savez('/home/rqiao/predict/modelv5_Resize.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate90')
 
-test_p=np.zeros((6925,344),dtype=np.float32)
+test_p=np.zeros((6925,447),dtype=np.float32)
 j=0
 for i in name['Image']:
     a=get_img(i)
@@ -160,7 +160,7 @@ np.savez('/home/rqiao/predict/modelv5_Rotate90.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate180')
 
-test_p=np.zeros((6925,344),dtype=np.float32)
+test_p=np.zeros((6925,447),dtype=np.float32)
 j=0
 for i in name['Image']:
     a=get_img(i)
@@ -172,7 +172,7 @@ np.savez('/home/rqiao/predict/modelv5_Rotate180.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/Rotate270')
 
-test_p=np.zeros((6925,344),dtype=np.float32)
+test_p=np.zeros((6925,447),dtype=np.float32)
 j=0
 for i in name['Image']:
     a=get_img(i)
@@ -184,7 +184,7 @@ np.savez('/home/rqiao/predict/modelv5_Rotate270.npz',test_p)
 
 os.chdir('/scratch/rqiao/Fin/FlipX')
 
-test_p=np.zeros((6925,344),dtype=np.float32)
+test_p=np.zeros((6925,447),dtype=np.float32)
 j=0
 for i in name['Image']:
     a=get_img(i)
